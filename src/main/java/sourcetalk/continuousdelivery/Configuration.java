@@ -20,4 +20,12 @@ public class Configuration {
     public int getPortShutdown() {
         return Integer.valueOf(properties.getProperty("port.shutdown"));
     }
+
+    public String getDbUrl() {
+        return properties.getProperty("db.url");
+    }
+
+    public boolean isDbLoadTestData() {
+        return Boolean.parseBoolean(properties.getProperty("db.loadTestData"));
+    }
 }

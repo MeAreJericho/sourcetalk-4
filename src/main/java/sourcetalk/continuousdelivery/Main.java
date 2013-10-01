@@ -1,5 +1,6 @@
 package sourcetalk.continuousdelivery;
 
+import com.googlecode.flyway.core.Flyway;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
@@ -29,6 +30,15 @@ public class Main {
     }
 
     public static void start() {
+        Flyway flyway = new Flyway();
+        flyway.setDataSource(Environment.getConfiguration().getDbUrl(), "SA", "");
+        if (Environment.getConfiguration().isDbLoadTestData()) {
+            flyway.setLocations("db/migration", "db/testdata");
+        } else {
+            flyway.setLocations("db/migration");
+        }
+        flyway.migrate();
+
         createHttpServer();
         createShutdownServer();
 

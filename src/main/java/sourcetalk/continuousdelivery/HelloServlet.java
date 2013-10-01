@@ -10,7 +10,7 @@ import java.net.InetAddress;
 import java.util.Scanner;
 
 public class HelloServlet extends HttpServlet {
-    private final FriendRepository friendRepository = new InMemoryFriendRepository();
+    private final FriendRepository friendRepository = new DatabaseFriendRepository();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
